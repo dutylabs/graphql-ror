@@ -5,5 +5,6 @@ module Types
     field :id, ID, null: false
     field :url, String, null: false
     field :description, String, null: false
+    field :posteBy, UserType, null: false, method: :user
   end
 end

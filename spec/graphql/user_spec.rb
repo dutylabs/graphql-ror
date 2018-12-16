@@ -42,6 +42,7 @@ RSpec.describe GraphqlSchema do
     end
     context "login user" do
       # override user and query
+      let(:context) { { session: {} } }
       let(:user) { create(:user) }
       let(:query_string) { %|mutation{
         loginUser(
@@ -62,12 +63,9 @@ RSpec.describe GraphqlSchema do
       }|
       }
       it "logins succesfully" do
-        puts result['data']
-        token = result["data"]["loginUser"]["token"]
         user_id = result["data"]["loginUser"]["user"]["id"]
         user_name = result["data"]["loginUser"]["user"]["name"]
         user_email = result["data"]["loginUser"]["user"]["email"]
-        expect(token.blank?).to eq(false)
         expect(user_id).to eq(user.id.to_s)
         expect(user_name).to eq(user.name)
         expect(user_email).to eq(user.email)
