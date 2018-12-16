@@ -6,6 +6,6 @@ Based on the Tutorial from here: [HowToGraphQL](https://www.howtographql.com/gra
 
 ## TODO
 [ ] [Filtering](https://www.howtographql.com/graphql-ruby/7-filtering/)
-[ ] [Pagination](https://www.howtographql.com/graphql-ruby/8-pagination/)
+[X] [Pagination](https://www.howtographql.com/graphql-ruby/8-pagination/)
 
 

@@ -14,5 +14,10 @@ module Types
     def link(id:)
       Link.find(id)
     end
+
+    field :allLinksConnection, LinkType.connection_type, null: false
+    def all_links_connection
+      Link.all
+    end
   end
 end
