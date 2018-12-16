@@ -5,11 +5,14 @@ module Types
       argument :description, String, required: false
     end
     def create_link(url:, description:)
-      Link.create(
+      Link.create!(
         url: url,
         description: description,
         user: context[:current_user],
       )
+    rescue ActiveRecord::RecordInvalid => e
+      # this would catch all validation errors and translate them to GraphQL::ExecutionError
+      GraphQL::ExecutionError.new("Invalid input: #{e.record.errors.full_messages.join(', ')}")
     end
 
     field :createUser, UserType, null: true do
@@ -40,6 +43,17 @@ module Types
         user: user,
         token: token,
       })
+    end
+
+    field :createVote, VoteType, null: true do
+      argument :linkId, ID, required: true
+    end
+
+    def create_vote(link_id:)
+      Vote.create!(
+        link: Link.find_by(id: link_id),
+        user: context[:current_user],
+      )
     end
   end
 end
