@@ -1,20 +1,18 @@
 module Types
   class QueryType < Types::BaseObject
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
-    field :allMovies, [MovieType], null: true do
-      description "A list of all the movies"
+    field :allLinks, [LinkType], null: true do
+      description "A list of all the links"
     end
-    def all_movies
-      Movie.all
+    def all_links
+      Link.all
     end
 
-    field :movie, MovieType, null: true do
-      description "Return a movie"
+    field :link, LinkType, null: true do
+      description "Return a link"
       argument :id, ID, required: true
     end
-    def movie(id:)
-      Movie.find(id)
+    def link(id:)
+      Link.find(id)
     end
   end
 end
